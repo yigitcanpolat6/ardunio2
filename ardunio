@@ -1,0 +1,104 @@
+const int trigger_pin = 12;
+const int echo_pin = 13;
+const int buzzer = 8;
+const int y1led = 2;
+const int y2led = 3;
+const int s1led = 4;
+const int s2led = 5;
+const int k1led = 7;
+const int k2led = 6;
+
+int sure;
+int mesafe;
+
+void setup() {
+  pinMode(k1led, OUTPUT);
+  pinMode(k2led, OUTPUT);
+  pinMode(s1led, OUTPUT);
+  pinMode(s2led, OUTPUT);
+  pinMode(y1led, OUTPUT);
+  pinMode(y2led, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(trigger_pin, OUTPUT);
+  pinMode(echo_pin, INPUT);
+  
+}
+
+void loop() {
+  digitalWrite(trigger_pin, HIGH);
+  delayMicroseconds(1000);
+  digitalWrite(trigger_pin, LOW);
+  sure = pulseIn(echo_pin, HIGH);
+  mesafe = (sure / 2) / 28.5;
+  if (mesafe <= 5)
+  {
+    digitalWrite(k1led, HIGH);
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(k2led, HIGH);
+    digitalWrite(s1led, HIGH);
+    digitalWrite(s2led, HIGH);
+    digitalWrite(y1led, HIGH);
+    digitalWrite(y2led, HIGH);
+  }
+
+  else if (mesafe <= 10)
+  {
+    digitalWrite(k1led, LOW);
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(k2led, HIGH);
+    digitalWrite(s1led, HIGH);
+    digitalWrite(s2led, HIGH);
+    digitalWrite(y1led, HIGH);
+    digitalWrite(y2led, HIGH);
+  }
+
+  else if (mesafe <= 15)
+  {
+    digitalWrite(k1led, LOW);
+    digitalWrite(buzzer, HIGH);
+    delay(50);
+    digitalWrite(buzzer, LOW);
+    delay(50);
+    digitalWrite(k2led, LOW);
+    digitalWrite(s1led, HIGH);
+    digitalWrite(s2led, HIGH);
+    digitalWrite(y1led, HIGH);
+    digitalWrite(y2led, HIGH);
+  }
+
+  else if (mesafe <= 20)
+  {
+    digitalWrite(k1led, LOW);
+    digitalWrite(buzzer, HIGH);
+    delay(100);
+    digitalWrite(buzzer, LOW);
+    delay(100);
+    digitalWrite(k2led, LOW);
+    digitalWrite(s1led, HIGH);
+    digitalWrite(s2led, LOW);
+    digitalWrite(y1led, HIGH);
+    digitalWrite(y2led, HIGH);
+  }
+  else if (mesafe <= 25)
+  {
+   digitalWrite(k1led, LOW);
+   digitalWrite(buzzer, LOW);
+    digitalWrite(k2led, LOW);
+    digitalWrite(s1led, LOW);
+    digitalWrite(s2led, LOW);
+    digitalWrite(y1led, HIGH);
+    digitalWrite(y2led, HIGH);
+  }
+
+  else 
+  {
+    digitalWrite(k1led, LOW);
+    digitalWrite(buzzer, LOW);
+    digitalWrite(k2led, LOW);
+    digitalWrite(s1led, LOW);
+    digitalWrite(s2led, LOW);
+    digitalWrite(y1led, HIGH);
+    digitalWrite(y2led, LOW);
+  }
+  delay(100);
+}
